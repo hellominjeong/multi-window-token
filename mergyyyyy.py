@@ -1,21 +1,7 @@
 import torch
-from typing import Callable, Tuple
-
-def do_nothing(x: torch.Tensor, mode: str = None):
-    return x
-
-def mps_gather_workaround(input, dim, index):
-    if input.shape[-1] == 1:
-        return torch.gather(
-            input.unsqueeze(-1),
-            dim - 1 if dim < 0 else dim,
-            index.unsqueeze(-1)
-        ).squeeze(-1)
-    else:
-        return torch.gather(input, dim, index)
-import torch
 from typing import Tuple, Callable
 import torch.nn.functional as F
+
 def do_nothing(x: torch.Tensor, mode: str = None):
     return x
 
