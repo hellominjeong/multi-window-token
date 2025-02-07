@@ -64,7 +64,7 @@ def merge_windows(windows: torch.Tensor, similarity_matrix: torch.Tensor, r: int
         values, indices = similarity_matrix.view(B, -1).topk(1, dim=-1)  
         idx1 = indices // num_windows
         idx2 = indices % num_windows
-        valid_pairs = idx1 != idx2
+        valid_pairs = idx1 != idx2 #자기 자신과 병합되지 않도록 필터링하는 과정
         idx1 = torch.where(valid_pairs, idx1, -1)
         idx2 = torch.where(valid_pairs, idx2, -1)
 
